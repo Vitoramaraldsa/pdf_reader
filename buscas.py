@@ -13,7 +13,7 @@ class Buscas:
             if (i >= result_busca + 20 and i <= result_busca2 - 1):
                 resultado = resultado + pagina.extract_text()[i]
 
-        # regex para capturar campos
+        #-----------------------------------regex para capturar campos
         #anos-------------------------------
         patternAnos = r'\b\d{4}'
         pattern = re.compile(patternAnos)
@@ -58,18 +58,29 @@ class Buscas:
             and len(docentes) == len(componentes_curriculares)
             and len(componentes_curriculares) == len(anos)
         ):  #retornar os anos para que seja comparado com o periodo letivos de admissao no robô
-            return "LISTA DE ANOS: " + str(anos).strip("[]")
+            # salvar todos os campos analisados no log
+            print("-----------------------------------------------------------------------------")
+            print(anos)
+            print(qualificacoes)
+            print(ch)
+            print(notal_final)
+            print(resultado_formacao)
+            print(docentes)
+            print(componentes_curriculares)
+            print("-----------------------------------------------------------------------------")
+            return str(anos).strip("[]")
         else:
+            # salvar todos os campos analisados no log
+            print("-----------------------------------------------------------------------------")
+            print(anos)
+            print(qualificacoes)
+            print(ch)
+            print(notal_final)
+            print(resultado_formacao)
+            print(docentes)
+            print(componentes_curriculares)
+            print("-----------------------------------------------------------------------------")
             return "VERIFIQUE A LISTA DE COMPONENTES CURRICULARES"
-
-        #salvar todos os campos analisados no log
-        print(anos)
-        print(qualificacoes)
-        print(ch)
-        print(notal_final)
-        print(resultado_formacao)
-        print(docentes)
-        print(componentes_curriculares)
     #-----------------------------------------------------------------------------------------------------------------------
     # Realiza a busca de um com uma quantidade limitada de caracteres
     def BuscarCampoRanged(qtd_carateres, buscar_por, pular_caracteres, pagina):
@@ -90,7 +101,6 @@ class Buscas:
         for i in range(result_arquivo_qtd_total):
             if (i >= result_busca + pular_caracteres and i <= result_busca2 - 1):
                 resultado = resultado + pagina.extract_text()[i]
-
         return resultado.strip()
 #-----------------------------------------------------------------------------------------------------------------------
     def VerificarCh(pagina):
@@ -108,4 +118,4 @@ class Buscas:
         patternAproveitamento = r'Aproveitamento de Estudos'
         pattern = re.compile(patternAproveitamento)
         aproveitamento = pattern.findall(text_pagina)
-        return aproveitamento
+        return str(aproveitamento)
